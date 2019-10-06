@@ -62,7 +62,6 @@ if __name__ == '__main__':
         file = sys.stdin.readline().strip()
         treasure_road = treasure_map_from_file(file)
         find_treasure(treasure_road)
-        input("do you want continue the game?")
     elif first_step == "2":
         print("Enter 25 number (each of them should be between 11 and 55) ")
         treasure_road = treasure_map_from_keyboard()

@@ -26,6 +26,8 @@ def treasure_map_from_file(file_name):
             row = list(map(int, line))
             if validate(row):
                 treasure_map.append(row)
+            else:
+                return False
     return treasure_map
 
 
@@ -65,7 +67,11 @@ if __name__ == '__main__':
         print("Please provide me the path to the file ")
         file = sys.stdin.readline().strip()
         treasure_road = treasure_map_from_file(file)
+        if not treasure_road:
+            input("Error: your file has incorrect values.\nPlease for exit press Enter")
+        else:
+            find_treasure(treasure_road)
     elif first_step == "2":
         print("Please enter 25 numbers (each of them should be between 11 and 55) ")
         treasure_road = treasure_map_from_keyboard()
-    find_treasure(treasure_road)
+        find_treasure(treasure_road)

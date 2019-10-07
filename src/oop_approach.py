@@ -18,6 +18,9 @@ class Map:
                 row = list(map(int, line))
                 if self.validate(row):
                     self.grid[i] = [Cell(value) for value in row]
+                else:
+                    print("Error: your file has incorrect values")
+                    return False
 
     def from_keyboard(self):
         """Creating treasure map as list 5 by 5 from keyboard"""
@@ -50,8 +53,6 @@ class Map:
         """Finding next cell in map"""
         x, y = cell_value.coordinates
         next_cell_value = self.grid[x][y]
-        if cell_value.value == next_cell_value.value:
-            self.treasure_value = next_cell_value
         return next_cell_value
 
     def hunt_treasure(self):
@@ -60,7 +61,10 @@ class Map:
         while True:
             if cell_value.value not in self.road_to_treasure:
                 self.road_to_treasure.append(cell_value.value)
-                cell_value = self.next_cell(cell_value)
+                if cell_value.value == self.next_cell(cell_value).value:
+                    self.treasure_value = self.next_cell(cell_value).value
+                else:
+                    cell_value = self.next_cell(cell_value)
             else:
                 if self.treasure_value:
                     print(" ".join(map(str, self.road_to_treasure)))
@@ -89,8 +93,12 @@ if __name__ == "__main__":
     if first_step == "1":
         print("Please provide me the path to the file ")
         fl_name = sys.stdin.readline().strip()
-        treasure.from_file(fl_name)
+        if not treasure.from_file(fl_name):
+            input("Please for exit press Enter")
+        else:
+            treasure.from_file(fl_name)
+            treasure.hunt_treasure()
     elif first_step == "2":
         print("Please enter 25 numbers (each of them should be between 11 and 55) \n")
         treasure.from_keyboard()
-    treasure.hunt_treasure()
+        treasure.hunt_treasure()

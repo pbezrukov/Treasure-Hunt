@@ -2,7 +2,9 @@ import sys
 
 
 class Map:
+    """Class of map which maybe contains treasure"""
     def __init__(self):
+        """Initialize class objects"""
         self.grid = [[]]*5
         self.road_to_treasure = []
         self.treasure_value = None
@@ -45,6 +47,7 @@ class Map:
             return True
 
     def next_cell(self, cell_value):
+        """Finding next cell in map"""
         x, y = cell_value.coordinates
         next_cell_value = self.grid[x][y]
         if cell_value.value == next_cell_value.value:
@@ -52,6 +55,7 @@ class Map:
         return next_cell_value
 
     def hunt_treasure(self):
+        """Finding treasure"""
         cell_value = self.grid[0][0]
         while True:
             if cell_value.value not in self.road_to_treasure:
@@ -66,13 +70,16 @@ class Map:
 
 
 class Cell:
+    """Class of cells values"""
     def __init__(self, value):
+        """Initialize value of cell"""
         self.value = value
         self.__x = value // 10 - 1
         self.__y = value % 10 - 1
 
     @property
     def coordinates(self):
+        """Coordinates of next cell"""
         return self.__x, self.__y
 
 
@@ -81,8 +88,8 @@ if __name__ == "__main__":
     treasure = Map()
     if first_step == "1":
         print("Please provide me the path to the file ")
-        file = sys.stdin.readline().strip()
-        treasure.from_file(file)
+        fl_name = sys.stdin.readline().strip()
+        treasure.from_file(fl_name)
     elif first_step == "2":
         print("Please enter 25 numbers (each of them should be between 11 and 55) \n")
         treasure.from_keyboard()

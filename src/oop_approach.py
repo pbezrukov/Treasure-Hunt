@@ -1,5 +1,4 @@
 import sys
-from typing import List
 
 
 class Map:
@@ -48,7 +47,6 @@ class Map:
     def next_cell(self, cell_value):
         x, y = cell_value.coordinates
         next_cell_value = self.grid[x][y]
-        # coordinates_sum = (x+1)*10 + y + 1
         if cell_value.value == next_cell_value.value:
             self.treasure_value = next_cell_value
         return next_cell_value
@@ -61,7 +59,6 @@ class Map:
                 cell_value = self.next_cell(cell_value)
             else:
                 if self.treasure_value:
-                    print("Treasure has found")
                     print(" ".join(map(str, self.road_to_treasure)))
                 else:
                     print("This map has not treasure")
@@ -80,9 +77,13 @@ class Cell:
 
 
 if __name__ == "__main__":
-    a = input("enter")
-    n = Map()
-    file_a = input("File")
-    n.from_file(file_a)
-    n.hunt_treasure()
-    # n.__str__()
+    first_step = input("how do you want to give map me? File(1) or Keyboard(2)? ")
+    treasure = Map()
+    if first_step == "1":
+        print("Please provide me the path to the file ")
+        file = sys.stdin.readline().strip()
+        treasure.from_file(file)
+    elif first_step == "2":
+        print("Please enter 25 numbers (each of them should be between 11 and 55) \n")
+        treasure.from_keyboard()
+    treasure.hunt_treasure()

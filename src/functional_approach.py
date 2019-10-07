@@ -41,17 +41,22 @@ def treasure_map_from_keyboard():
     return treasure_map
 
 
-def find_treasure(table: List[List[int]], x: int = 0, y: int = 0) -> None:
+road_to_treasure = []
+
+
+def find_treasure(table: List[List[int]], x: int = 0, y: int = 0, i: int = 0) -> None:
     """Finding cell which contains treasure"""
     cell_value: int = table[x][y]
-    coordinates: int = (x+1)*10 + y+1
+    coordinates: int = (x+1)*10+y+1
     if cell_value == coordinates:
-        print(cell_value, end=' \n')
+        print(" ".join(map(str, road_to_treasure)))
+    elif len(road_to_treasure) > 25:
+        print("This map has not treasure")
     else:
         x: int = cell_value // 10 - 1
         y: int = cell_value % 10 - 1
-        print(cell_value, end=' ')
-        find_treasure(table, x, y)
+        road_to_treasure.append(cell_value)
+        find_treasure(table, x, y, i)
 
 
 if __name__ == '__main__':

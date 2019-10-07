@@ -14,8 +14,8 @@ class Map:
             lines = file.readlines()
             for i in range(5):
                 line = lines[i].strip().split()
-                row = map(int, line)
-                if self.validate(list(row)):
+                row = list(map(int, line))
+                if self.validate(row):
                     self.grid[i] = [Cell(value) for value in row]
 
     def from_keyboard(self):
@@ -24,12 +24,13 @@ class Map:
         while counter < 5:
             line = sys.stdin.readline()
             line = line.strip().split()
-            row = map(int, line)
-            if self.validate(list(row)):
+            row = list(map(int, line))
+            if self.validate(row):
                 self.grid[counter] = [Cell(value) for value in row]
                 counter += 1
 
-    def validate(self, r: List[int]):
+    @staticmethod
+    def validate(r):
         """Check input data"""
         try:
             if len(r) == 5:
@@ -45,23 +46,23 @@ class Map:
             return True
 
     def next_cell(self, cell_value):
-        x = Cell(cell_value).coordinates[0]
-        y = Cell(cell_value).coordinates[1]
+        x, y = cell_value.coordinates
         next_cell_value = self.grid[x][y]
         # coordinates_sum = (x+1)*10 + y + 1
-        if next_cell_value == cell_value:
+        if cell_value.value == next_cell_value.value:
             self.treasure_value = next_cell_value
         return next_cell_value
 
     def hunt_treasure(self):
         cell_value = self.grid[0][0]
         while True:
-            if cell_value not in self.road_to_treasure:
-                self.road_to_treasure.append(cell_value)
+            if cell_value.value not in self.road_to_treasure:
+                self.road_to_treasure.append(cell_value.value)
                 cell_value = self.next_cell(cell_value)
             else:
                 if self.treasure_value:
                     print("Treasure has found")
+                    print(" ".join(map(str, self.road_to_treasure)))
                 else:
                     print("This map has not treasure")
                 return self.road_to_treasure
@@ -81,6 +82,7 @@ class Cell:
 if __name__ == "__main__":
     a = input("enter")
     n = Map()
-    file = input("File")
-    n.from_file(file)
+    file_a = input("File")
+    n.from_file(file_a)
     n.hunt_treasure()
+    # n.__str__()

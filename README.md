@@ -7,12 +7,15 @@
 
 `cd path/to/Treasure-Hunt/src`  
 `python functional_approach.py`
-
-##### Remark
-If you write two cells with value which point on each other you will get endless cycle. As a consequence the program will not give the right result
+`pip install -r requirements.txt`
 <hr>
 
 ### Run OOP approach
 `cd path/to/Treasure-Hunt/src`  
 `python oop_approach.py`
+ <hr>
  
+### Run tests
+`cd path/to/Treasure_Hunt`  
+`pytest`
+

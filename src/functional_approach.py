@@ -1,7 +1,9 @@
 import os
 import sys
 from typing import List
+
 sys.path.append(os.path.abspath(__file__ + "../../.."))
+
 from src.utils import open_file, next_game, validate
 
 
@@ -36,7 +38,7 @@ road_to_treasure = []
 def find_treasure(table: List[List[int]], x: int = 0, y: int = 0):
     """Finding cell which contains treasure"""
     cell_value: int = table[x][y]
-    coordinates: int = (x+1)*10+y+1
+    coordinates: int = (x + 1) * 10 + y + 1
     if cell_value == coordinates:
         print(" ".join(map(str, road_to_treasure)))
         del road_to_treasure[:]

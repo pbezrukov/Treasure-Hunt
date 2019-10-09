@@ -34,22 +34,22 @@ class Map:
                 self.grid[counter] = [Cell(value) for value in row]
                 counter += 1
 
-    def next_cell(self, cell_value):
+    def next_cell(self, cell):
         """Finding next cell in map"""
-        x, y = cell_value.coordinates
-        next_cell_value = self.grid[x][y]
-        return next_cell_value
+        x, y = cell.coordinates
+        next_cell = self.grid[x][y]
+        return next_cell
 
     def hunt_treasure(self):
         """Finding treasure"""
-        cell_value = self.grid[0][0]
+        cell = self.grid[0][0]
         while True:
-            if cell_value.value not in self.road_to_treasure:
-                self.road_to_treasure.append(cell_value.value)
-                if cell_value.value == self.next_cell(cell_value).value:
-                    self.treasure_value = self.next_cell(cell_value).value
+            if cell.value not in self.road_to_treasure:
+                self.road_to_treasure.append(cell.value)
+                if cell.value == self.next_cell(cell).value:
+                    self.treasure_value = self.next_cell(cell).value
                 else:
-                    cell_value = self.next_cell(cell_value)
+                    cell = self.next_cell(cell)
             else:
                 if self.treasure_value:
                     print(" ".join(map(str, self.road_to_treasure)))

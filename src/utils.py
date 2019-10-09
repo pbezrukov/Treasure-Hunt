@@ -1,3 +1,6 @@
+from typing import List
+
+
 def next_game():
     """Starting new game or exit"""
     answer = input("Do you want play again? Yes(Y) or No(N)? ")
@@ -7,7 +10,7 @@ def next_game():
         return False
 
 
-def validate(r):
+def validate(r: List[int]):
     """Check input data"""
     try:
         if len(r) == 5:

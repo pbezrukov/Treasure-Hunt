@@ -3,6 +3,7 @@ import sys
 from unittest.mock import patch
 
 sys.path.append(os.path.abspath(__file__ + "../../.."))
+
 from src.map import Map
 
 INPUT_WITH_TREASURE = ['34 21 32 41 25',

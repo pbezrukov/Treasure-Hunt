@@ -5,6 +5,7 @@ from unittest.mock import patch
 import pytest
 
 sys.path.append(os.path.abspath(__file__ + "../../.."))
+
 from src.functional_approach import treasure_map_from_file, treasure_map_from_keyboard, find_treasure
 from src.utils import validate
 
@@ -49,6 +50,7 @@ def test_from_keyboard():
     with patch('builtins.input', side_effect=FILE):
         a = treasure_map_from_keyboard()
     assert a == EXAMPLE_TREASURE_MAP
+
 
 @pytest.mark.parametrize("test_input,expected",
                          [(INPUT_WITH_TREASURE, OUTPUT_TREASURE), (INPUT_WITHOUT_TREASURE, OUTPUT_MESSAGE)])

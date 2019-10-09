@@ -3,7 +3,6 @@ import sys
 
 sys.path.append(os.path.abspath(__file__ + "../../.."))
 
-
 from src.utils import next_game, open_file
 from src.map import Map
 
